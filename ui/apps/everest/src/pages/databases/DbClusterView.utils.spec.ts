@@ -61,11 +61,11 @@ describe('getLastBackupStatus', () => {
     expect(getLastBackupStatus(backups, [])).toBe('Inactive');
   });
 
-  it('returns Inactive when all backups are FAILED even with schedules configured', () => {
+  it('returns Scheduled when all backups are FAILED but schedules exist', () => {
     const backups = sortBackupsByTime([
       makeBackup(BackupStatus.FAILED, '2024-01-01T00:00:00Z'),
     ]);
-    expect(getLastBackupStatus(backups, [makeSchedule()])).toBe('Inactive');
+    expect(getLastBackupStatus(backups, [makeSchedule()])).toBe('Scheduled');
   });
 
   it('returns Not Started for UNKNOWN state', () => {

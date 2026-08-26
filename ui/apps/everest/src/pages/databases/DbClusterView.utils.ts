@@ -146,7 +146,10 @@ export const getLastBackupStatus = (
   const lastBackup = filteredBackups[filteredBackups.length - 1];
 
   if (!lastBackup) {
-    return Messages.lastBackup.inactive;
+    if (!schedules.length) {
+      return Messages.lastBackup.inactive;
+    }
+    return Messages.lastBackup.scheduled;
   }
 
   if (lastBackup.state === BackupStatus.IN_PROGRESS) {
